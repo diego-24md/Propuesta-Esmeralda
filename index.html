@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>¿Quieres ser mi novia, Esmeralda?</title>
+  <style>
+    body {
+      background: linear-gradient(180deg, #ffe6f2, #ffd1e8);
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      text-align: center;
+      height: 100vh;
+      overflow: hidden;
+      margin: 0;
+      color: #ff69b4;
+    }
+
+    h1 {
+      margin-top: 80px;
+      font-size: 2.5em;
+      color: #ff1493;
+      text-shadow: 2px 2px 4px white;
+    }
+
+    .buttons {
+      margin-top: 50px;
+    }
+
+    button {
+      font-size: 1.5em;
+      padding: 10px 25px;
+      margin: 20px;
+      border-radius: 20px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    #yes {
+      background-color: #ffb6c1;
+      color: white;
+      box-shadow: 0 0 10px #ff69b4;
+    }
+
+    #yes:hover {
+      background-color: #ff69b4;
+      transform: scale(1.1);
+    }
+
+    #no {
+      background-color: #fff;
+      color: #ff69b4;
+      box-shadow: 0 0 10px #ffb6c1;
+      position: absolute;
+    }
+
+    #message {
+      display: none;
+      font-size: 2em;
+      margin-top: 40px;
+      color: #ff1493;
+      text-shadow: 2px 2px 4px white;
+      animation: fadeIn 1s ease-in-out forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .heart {
+      position: fixed;
+      width: 25px;
+      height: 25px;
+      background: pink;
+      transform: rotate(45deg);
+      animation: float 4s linear infinite;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: "";
+      position: absolute;
+      width: 25px;
+      height: 25px;
+      background: pink;
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -12px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: -12px;
+      top: 0;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0) rotate(45deg); opacity: 1; }
+      100% { transform: translateY(-600px) rotate(45deg); opacity: 0; }
+    }
+
+    img {
+      width: 120px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <audio autoplay loop>
+    <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_7b4f8f7bbf.mp3" type="audio/mpeg">
+  </audio>
+
+  <h1>¿Quieres ser mi novia, Esmeralda? 💕</h1>
+  <img src="https://upload.wikimedia.org/wikipedia/en/0/05/Hello_Kitty_character_portrait.png" alt="Hello Kitty">
+
+  <div class="buttons">
+    <button id="yes">Sí 💖</button>
+    <button id="no">No 😿</button>
+  </div>
+
+  <div id="message">¡Sabía que dirías que sí, Esmeralda! 💕🐱</div>
+
+  <script>
+    const noBtn = document.getElementById('no');
+    const yesBtn = document.getElementById('yes');
+    const message = document.getElementById('message');
+
+    const messages = [
+      "¿Segura? 🥺",
+      "Piénsalo bien 💞",
+      "No me digas que no 😢",
+      "Te voy a convencer 💘",
+      "No puedes escapar 😝",
+      "Dame una oportunidad 🐱",
+      "¿De verdad no? 😿"
+    ];
+
+    let msgIndex = 0;
+
+    noBtn.addEventListener('mouseover', () => {
+      const x = Math.random() * (window.innerWidth - 150);
+      const y = Math.random() * (window.innerHeight - 150);
+      noBtn.style.left = `${x}px`;
+      noBtn.style.top = `${y}px`;
+
+      noBtn.textContent = messages[msgIndex];
+      msgIndex = (msgIndex + 1) % messages.length;
+    });
+
+    yesBtn.addEventListener('click', () => {
+      message.style.display = 'block';
+      for (let i = 0; i < 30; i++) {
+        createHeart();
+      }
+    });
+
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.style.left = Math.random() * window.innerWidth + 'px';
+      heart.style.background = `hsl(${Math.random() * 360}, 80%, 80%)`;
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 4000);
+    }
+  </script>
+</body>
+</html>
